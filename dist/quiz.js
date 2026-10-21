@@ -98,7 +98,7 @@
     const checkout = window.laraCheckoutUrl();
     if (checkout) {
       $('result-cta').href = checkout;
-      $('result-cta').replaceChildren(document.createTextNode('Quero meu acesso agora ↗'));
+      $('result-cta').innerHTML = '<span>Quero meu acesso agora</span><svg class="icon-arrow" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     updateProgress();
     if (focus) focusTitle('result-title');
