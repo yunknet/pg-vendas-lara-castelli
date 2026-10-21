@@ -4,6 +4,7 @@ try {
   const parsed = new URL(destination);
   if (parsed.protocol === 'https:') checkoutUrl = parsed.href;
 } catch {}
+
 if (checkoutUrl) {
   document.querySelectorAll('.conversion').forEach(button => {
     button.disabled = false;
@@ -11,6 +12,8 @@ if (checkoutUrl) {
   });
   document.querySelectorAll('.checkout-note').forEach(note => { note.hidden = true; });
 }
+
 document.querySelectorAll('details').forEach(item => item.addEventListener('toggle', () => {
-  item.querySelector('summary span').textContent = item.open ? '−' : '+';
+  const icon = item.querySelector('.toggle-icon') || item.querySelector('summary span:last-child');
+  if (icon) icon.textContent = item.open ? '−' : '+';
 }));
