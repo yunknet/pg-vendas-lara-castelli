@@ -1,2 +1,2 @@
-// Preencha com o destino comercial aprovado (checkout, WhatsApp ou formulário).
+// Informe o link HTTPS do checkout para ativar os botões de compra.
 window.LARA_CONFIG = { conversionUrl: '' };

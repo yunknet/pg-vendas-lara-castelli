@@ -14,8 +14,9 @@ Foco na próxima etapa depois do emagrecimento. Imagens da personagem como ident
 ## Propostas a validar (notas internas, fora da página)
 - A oferta de 30 dias segue a hipótese já fornecida pelo criador; precisa de confirmação da operação e do conteúdo antes de abrir inscrições.
 - “Sua próxima etapa” é uma linha de comunicação, não um nome comercial definido.
-- Confirmar responsáveis, qualificações, formato de treino e alimentação, personalização, frequência e canais de acompanhamento, critérios de entrada, preço, pagamento e termos antes da venda.
-- Não há checkout, coleta de dados ou compra implementada. As chamadas apresentam a entrega e a oferta. A chamada final abre o perfil oficial já fornecido. Configurar `dist/config.js` com o destino comercial aprovado para conectar os botões finais.
+- Confirmar responsáveis, qualificações, formato de treino e alimentação, personalização, frequência e canais de acompanhamento, critérios de entrada, pagamento e termos antes da venda.
+- Não há checkout, coleta de dados ou compra implementada. As chamadas apresentam a entrega e a oferta. Preço confirmado pelo criador: de R$ 97,90 por R$ 37,90. Botões de compra desativados, sem redirecionamento, até receber o link do checkout. Configurar `dist/config.js` com o destino comercial aprovado para conectar os botões finais.
 
 ## Estrutura
 Site estático em dist/. Prévia com `node dev-server.mjs`. Configuração de publicação em .openai/hosting.json. Nenhum pixel de rastreamento do Yuri foi reutilizado.
+
