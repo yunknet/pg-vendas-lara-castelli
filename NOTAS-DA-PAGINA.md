@@ -20,3 +20,6 @@ Foco na próxima etapa depois do emagrecimento. Imagens da personagem como ident
 ## Estrutura
 Site estático em dist/. Prévia com `node dev-server.mjs`. Configuração de publicação em .openai/hosting.json. Nenhum pixel de rastreamento do Yuri foi reutilizado.
 
+
+## Atualização do gancho
+Contexto recuperado da conversa “Criar vídeo vertical da Lara”: desejo de cuidar da flacidez e buscar firmeza/definição depois das canetas. H1 adaptado para “Emagreceu com as canetas, mas a flacidez ainda incomoda?”. A promessa permanece treino, alimentação e acompanhamento para força e definição, sem afirmar remoção de excesso de pele.
