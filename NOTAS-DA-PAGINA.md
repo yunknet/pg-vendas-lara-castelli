@@ -23,3 +23,7 @@ Site estático em dist/. Prévia com `node dev-server.mjs`. Configuração de pu
 
 ## Atualização do gancho
 Contexto recuperado da conversa “Criar vídeo vertical da Lara”: desejo de cuidar da flacidez e buscar firmeza/definição depois das canetas. H1 adaptado para “Emagreceu com as canetas, mas a flacidez ainda incomoda?”. A promessa permanece treino, alimentação e acompanhamento para força e definição, sem afirmar remoção de excesso de pele.
+
+## Posicionamento integral — aparência e autoestima
+Reescrita de toda a página a pedido do criador: desejo de mudar a aparência, buscar firmeza/definição e sentir-se melhor no próprio corpo. Retirado o foco comercial em força. Mantidas as três entregas, o período de 30 dias, o preço e o checkout pendente. Autoestima tratada como desejo, sem resultado psicológico garantido. FAQ diferencia definição muscular de remoção de excesso de pele.
+Referência clínica para essa distinção: https://www.plasticsurgery.org/documents/health-policy/guidelines/guideline-2017-skin-redundancy.pdf e https://www.plasticsurgery.org/cosmetic-procedures/body-contouring .
