@@ -1,29 +1,33 @@
-# Página de vendas — Lara Castelli
+# Página de vendas e quiz — Lara Castelli
 
-## Referências efetivamente consultadas
-- https://github.com/yunknet/pg-vendas-playbook-yuri — código da página: promessa segmentada, apresentação da entrega, identificação, mecanismo, oferta, dúvidas e repetição dos CTAs. A biografia, números, provas, preços e bônus não se transferem à nova oferta.
-- https://vemtreinar.com/ — observação visual e leitura pelo navegador: benefício relacionado à rotina, entrega concreta, objeções e oferta. Não copiamos funcionalidades, preços, garantias ou depoimentos.
-- https://www.instagram.com/lara.castelli.oficial/ — leitura e visualização do perfil: treino, alimentação, autocuidado, organização e tom acolhedor. Aproveitada a frase de continuidade usada nas publicações.
-- https://www.instagram.com/proposito.fit — leitura do perfil: constância, objetivos e conexão entre treino e alimentação.
-- https://www.instagram.com/p/DdjYFDVsbpY/ — publicação de lucasstaconi sobre treino híbrido, organização e acompanhamento. Não transferimos a entrega presencial ou personalização para o produto.
-- Materiais locais: lara-castelli.json e referências visuais lara-castelli-01.png e lara-castelli-02.png. Imagens preexistentes; não foram geradas imagens novas.
+## Estado desta revisão
+Base: atualização do usuário e5de2d3 (responsividade). Mantidas as cores verde/creme/lima, fontes Manrope e DM Sans, imagens, preço e melhorias de acessibilidade. Página reorganizada em hero com composição visual das entregas, explicação breve, entregáveis, público, convite ao quiz, oferta, FAQ e CTA final.
 
-## Decisões de copy
-Foco na próxima etapa depois do emagrecimento. Imagens da personagem como identidade visual, sem atribuição de formação, experiência pessoal ou resultado. Sem seção de biografia. Sem antes/depois, números, depoimentos, escassez ou garantias inventadas. Sem destaque ao web app. Página comercial sem avisos sobre ausência de estudos próprios.
+Todos os CTAs comerciais da landing levam a /quiz.html. Preço: de R$ 97,90 por R$ 37,90. Removidos avisos de configuração e o destaque de 30 dias. Isso não implica acesso vitalício nem muda o prazo operacional do produto: a duração continua pendente de definição.
 
-## Propostas a validar (notas internas, fora da página)
-- A oferta de 30 dias segue a hipótese já fornecida pelo criador; precisa de confirmação da operação e do conteúdo antes de abrir inscrições.
-- “Sua próxima etapa” é uma linha de comunicação, não um nome comercial definido.
-- Confirmar responsáveis, qualificações, formato de treino e alimentação, personalização, frequência e canais de acompanhamento, critérios de entrada, pagamento e termos antes da venda.
-- Não há checkout, coleta de dados ou compra implementada. As chamadas apresentam a entrega e a oferta. Preço confirmado pelo criador: de R$ 97,90 por R$ 37,90. Botões de compra desativados, sem redirecionamento, até receber o link do checkout. Configurar `dist/config.js` com o destino comercial aprovado para conectar os botões finais.
+## Quiz
+Seis perguntas: percepção do corpo, dificuldade da nova fase, exercícios, alimentação, obstáculo e prioridade. Quatro resultados: clareza, treino, alimentação e constância. Pontuação ponderada; em empate, vence a prioridade explicitamente escolhida. Texto final também usa a resposta sobre rotina de exercícios. A lógica é executada no navegador, como no código do Yuri; não há backend de IA, diagnóstico clínico ou prescrição.
 
-## Estrutura
-Site estático em dist/. Prévia com `node dev-server.mjs`. Configuração de publicação em .openai/hosting.json. Nenhum pixel de rastreamento do Yuri foi reutilizado.
+Voltar, refazer e retomar após atualização da página são suportados. Respostas ficam em sessionStorage, com validação e fallback caso o armazenamento esteja bloqueado. Não são incluídas em URLs, checkout, pixels ou serviços externos. Nenhuma coleta de nome/telefone/e-mail foi adicionada. Parâmetros UTM conhecidos são preservados apenas na navegação landing → quiz.
 
+## Checkout
+Definir conversionUrl em dist/config.js com a URL HTTPS real. Quando configurado, o botão final do resultado vira “Quero meu acesso agora”. Sem URL, o botão “Ver detalhes do plano” abre a explicação da entrega no próprio resultado. Não existe mensagem “Checkout em breve”, botão de compra inerte ou pagamento fictício.
 
-## Atualização do gancho
-Contexto recuperado da conversa “Criar vídeo vertical da Lara”: desejo de cuidar da flacidez e buscar firmeza/definição depois das canetas. H1 adaptado para “Emagreceu com as canetas, mas a flacidez ainda incomoda?”. A promessa permanece treino, alimentação e acompanhamento para força e definição, sem afirmar remoção de excesso de pele.
+## Decisões de oferta
+O usuário confirmou que ainda não há bônus. Nenhum bônus foi anunciado. Garantia comercial e prazo de reembolso não foram definidos, portanto não há selo nem garantia inventada. Permanecem a validar: duração de acesso/experiência, profissionais, personalização, frequência/canais de apoio e termos comerciais. A proposta pública mantém apenas treino, alimentação e acompanhamento.
 
-## Posicionamento integral — aparência e autoestima
-Reescrita de toda a página a pedido do criador: desejo de mudar a aparência, buscar firmeza/definição e sentir-se melhor no próprio corpo. Retirado o foco comercial em força. Mantidas as três entregas, o período de 30 dias, o preço e o checkout pendente. Autoestima tratada como desejo, sem resultado psicológico garantido. FAQ diferencia definição muscular de remoção de excesso de pele.
-Referência clínica para essa distinção: https://www.plasticsurgery.org/documents/health-policy/guidelines/guideline-2017-skin-redundancy.pdf e https://www.plasticsurgery.org/cosmetic-procedures/body-contouring .
+A composição visual do hero apresenta os três pilares; não representa prints reais do aplicativo ou materiais adicionais prometidos. Lara aparece como personagem visual, sem atribuição de formação, uso pessoal de medicamento ou resultado. Não há antes/depois, depoimentos fictícios, contagem regressiva ou promessa de remover excesso de pele.
+
+## Referências analisadas
+- https://lp.yuriconsorcio.com/quiz.html + código local do repositório yunknet/pg-vendas-playbook-yuri: perguntas em sequência, pesos por categoria, desempate por prioridade, resultado contextual e oferta. Adaptada a lógica, sem copiar rastreadores ou dados de consórcio.
+- https://rainhadacasa.com.br/: entrada por desejo, sentimento, dificuldade, contexto, rotina, objetivo e resultado. Visual central, progresso e respostas em cartões. Não foram transpostas suas alegações de mídia/ciência, números, testemunhos ou transformações em prazo definido.
+- https://bumbumlevantado.com.br/: quatro perguntas sobre adequação, percepção no treino, interesse e disposição; conclusão seguida de vídeo. Aproveitada a clareza do fluxo, sem copiar diagnóstico de ativação ou VSL.
+- Captura fornecida pelo usuário: hierarquia do quiz, imagem contextual e respostas grandes. Adaptada para a identidade Lara Castelli.
+- Referências anteriores: https://vemtreinar.com/, Instagram lara.castelli.oficial, proposito.fit e publicação DdjYFDVsbpY; utilizadas no posicionamento original.
+
+## Verificação
+node tests/quiz.test.cjs: 4.096 combinações, quatro perfis alcançáveis, desempates, respostas inválidas e quatro cenários representativos.
+Verificação de sintaxe dos scripts. Navegação real pelo navegador: entrada, seis perguntas, resultado, detalhes, recarga e reinício. Auditoria de largura em iframes 320, 360, 375, 390, 414, 768, 820, 1024 e 1280px; sem elementos fora da largura nas telas verificadas. Isso não equivale a testes físicos em todos os aparelhos.
+
+## Desenvolvimento
+Site estático em dist/. Prévia: node dev-server.mjs (porta 5184). Publicação: .openai/hosting.json. Testes fora de dist/, sem inclusão no site publicado.

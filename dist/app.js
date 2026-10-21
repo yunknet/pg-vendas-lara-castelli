@@ -1,19 +1,6 @@
-const destination = window.LARA_CONFIG?.conversionUrl;
-let checkoutUrl;
-try {
-  const parsed = new URL(destination);
-  if (parsed.protocol === 'https:') checkoutUrl = parsed.href;
-} catch {}
-
-if (checkoutUrl) {
-  document.querySelectorAll('.conversion').forEach(button => {
-    button.disabled = false;
-    button.addEventListener('click', () => window.location.assign(checkoutUrl));
+document.querySelectorAll('.faq details').forEach(item => {
+  item.addEventListener('toggle', () => {
+    const icon = item.querySelector('.toggle-icon');
+    if (icon) icon.textContent = item.open ? '−' : '+';
   });
-  document.querySelectorAll('.checkout-note').forEach(note => { note.hidden = true; });
-}
-
-document.querySelectorAll('details').forEach(item => item.addEventListener('toggle', () => {
-  const icon = item.querySelector('.toggle-icon') || item.querySelector('summary span:last-child');
-  if (icon) icon.textContent = item.open ? '−' : '+';
-}));
+});
