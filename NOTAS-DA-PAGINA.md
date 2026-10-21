@@ -31,3 +31,16 @@ Verificação de sintaxe dos scripts. Navegação real pelo navegador: entrada, 
 
 ## Desenvolvimento
 Site estático em dist/. Prévia: node dev-server.mjs (porta 5184). Publicação: .openai/hosting.json. Testes fora de dist/, sem inclusão no site publicado.
+
+## Correção sobre o commit do usuário 3e2f84e
+Domínio real informado pelo usuário: https://laracastelli.mivaia.com/ . Confirmada a correspondência entre seus arquivos publicados e o commit 3e2f84e em 21/10/2026. O servidor responde CSS e JS com Cache-Control max-age=2592000 (30 dias). A atualização anterior testava local e publicava em Sites, sem verificar esse domínio externo; as duas publicações devem ser distinguidas.
+
+Mantidos os SVGs, a formatação, tipografia e ajustes do usuário. Corrigidos contraste do preço/título no resultado do quiz, contenção de grid/flex, apresentação dos cartões sem sobreposição no celular e coluna única do hero em tablets de 761–960px. Removido overflow-x:hidden do body: cortes não são escondidos como solução.
+
+Antes de qualquer publicação com alterações em CSS ou JS, executar:
+1. node scripts/build-assets.cjs
+2. node tests/assets.test.cjs
+3. node tests/quiz.test.cjs
+O primeiro comando gera arquivos com hash em dist/assets e atualiza referências HTML. Isso evita reutilizar CSS/JS antigos do cache. Editar os arquivos fonte de dist/, não os arquivos com hash. Preservar assets publicados de versões anteriores para que páginas HTML ainda em cache continuem funcionando. Hashes normalizam quebras de linha para serem estáveis no Windows e no Linux.
+
+Auditoria da correção: 14 larguras (320 a 2560px), em quatro estados (landing com FAQ aberto, primeira pergunta, última pergunta, resultado): 56 combinações sem overflow ou corte dos textos inspecionados. Contraste do título e preço confirmado no card verde do resultado. Verificação visual manual de cards e oferta em tela estreita. Não equivale a certificação de todos os modelos de celular/navegadores.
