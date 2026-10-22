@@ -1,14 +1,14 @@
-const assert = require('node:assert/strict');
-const { questions, profiles, calculateProfile, validAnswers } = require('../dist/quiz-data.js');
-const winners = new Set(); let combinations = 0;
-for(let a=0;a<4;a++)for(let mask=1;mask<16;mask++)for(let c=0;c<4;c++)for(let d=0;d<4;d++)for(let e=0;e<4;e++){
- const selected=[0,1,2,3].filter(i=>mask&(1<<i)); const answers=[a,selected,c,d,e];
- const r=calculateProfile(answers),max=Math.max(...Object.values(r.scores)),preference=questions.at(-1).options[e].priority;
- assert.equal(r.scores[r.key],max);if(r.scores[preference]===max)assert.equal(r.key,preference);
- assert.equal(r.context,questions[2].options[c].context);assert.ok(r.goal&&r.profile.action);winners.add(r.key);combinations++;
+const assert=require('node:assert/strict');
+const {questions,profiles,calculateProfile,validAnswers}=require('../dist/quiz-data.js');
+let combinations=0;const winners=new Set();
+function visit(answers){if(answers.length<questions.length){questions[answers.length].options.forEach((_,i)=>visit([...answers,i]));return;}
+ const result=calculateProfile(answers),max=Math.max(...Object.values(result.scores));
+ assert.equal(result.scores[result.key],max);const preferred=questions.at(-1).options[answers.at(-1)].priority;
+ if(result.scores[preferred]===max)assert.equal(result.key,preferred);
+ assert.ok(result.goal&&result.profile.title);winners.add(result.key);combinations++;
 }
-assert.deepEqual([...winners].sort(),Object.keys(profiles).sort());
-for(const bad of [null,[],[0,[],0,0,0],[0,[0,0],0,0,0],[0,[4],0,0,0],[0,0,0,0,0],[0,[0],0,0,NaN],Array(5).fill(null)]){assert.equal(validAnswers(bad),false);assert.throws(()=>calculateProfile(bad),TypeError)}
-assert.equal(validAnswers(Array(5).fill(null),false),true);
-assert.equal(validAnswers([0,[0,2],null,null,null],false),true);
-console.log('PASS: '+combinations+' combinations; multiple selections, all profiles, ties and invalid answers.');
+visit([]);assert.deepEqual([...winners].sort(),Object.keys(profiles).sort());
+for(const bad of [null,[],Array(6).fill(null),[0,[0],0,0,0,0],[0,6,0,0,0,0],[0,0,0,0,0,NaN]]){assert.equal(validAnswers(bad),false);assert.throws(()=>calculateProfile(bad),TypeError)}
+assert.equal(validAnswers(Array(6).fill(null),false),true);
+assert.ok(questions.every(q=>!q.multiple));
+console.log('PASS: '+combinations+' combinations, single choice, all profiles and invalid answers.');

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   const { questions, validAnswers, calculateProfile } = window.LaraQuiz;
-  const key = 'lara-quiz-v2';
+  const key = 'lara-quiz-v3';
   let state = { step: 0, answers: Array(questions.length).fill(null), completed: false };
   let advancing = false;
   let timer;
@@ -35,6 +35,8 @@
     $('quiz-title').textContent = question.title;
     $('quiz-kicker').textContent = question.kicker;
     $('question-note').textContent = question.note;
+    $('question-note').hidden = !question.note;
+    $('quiz-kicker').hidden = !question.kicker;
     $('quiz-picture').hidden = !question.picture;
     if (question.picture) {
       const picture = $('quiz-picture');
@@ -44,14 +46,12 @@
       picture.querySelector('small').textContent = question.picture.tag;
     }
     $('quiz-opening').hidden = state.step !== 0;
-    $('quiz-continue').hidden = !question.multiple;
-    $('quiz-continue').disabled = !Array.isArray(state.answers[state.step]) || state.answers[state.step].length === 0;
     $('quiz-options').replaceChildren();
     question.options.forEach((option, index) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'quiz-option';
-      button.setAttribute('aria-pressed', String(question.multiple ? (state.answers[state.step] || []).includes(index) : state.answers[state.step] === index));
+      button.setAttribute('aria-pressed', String(state.answers[state.step] === index));
       const icon = document.createElement('span');
       icon.className = 'option-icon';
       icon.setAttribute('aria-hidden', 'true');
@@ -72,13 +72,7 @@
   }
   function choose(index) {
     if (advancing) return;
-    if (questions[state.step].multiple) {
-      const selected = Array.isArray(state.answers[state.step]) ? [...state.answers[state.step]] : [];
-      const position = selected.indexOf(index);
-      if (position === -1) selected.push(index); else selected.splice(position, 1);
-      state.answers[state.step] = selected.length ? selected : null;
-      save(); drawQuestion(); return;
-    }
+
     advancing = true;
     state.answers[state.step] = index;
     $('quiz-options').querySelectorAll('button').forEach((button, i) => {
@@ -108,23 +102,30 @@
     $('quiz-opening').hidden = true;
     $('result-panel').hidden = false;
     $('result-title').textContent = result.profile.title;
-    $('result-description').textContent = result.profile.body;
     $('result-goal').textContent = result.goal;
-    $('result-action-title').textContent = result.profile.actionTitle;
-    $('result-action').textContent = result.profile.action;
-    $('result-context').textContent = result.context;
     const checkout = window.laraCheckoutUrl();
     if (checkout) {
       $('result-cta').href = checkout;
       $('result-cta').innerHTML = '<span>Quero meu acesso agora</span><svg class="icon-arrow" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     updateProgress();
-    if (focus) focusTitle('result-title');
+    if (focus) { focusTitle('result-title'); celebrate(); }
   }
-  $('quiz-continue').addEventListener('click', () => {
-    if (advancing || !questions[state.step].multiple || !state.answers[state.step]?.length) return;
-    state.step++; save(); drawQuestion(true);
-  });
+
+  function celebrate() {
+    document.querySelector('.confetti')?.remove();
+    const layer = document.createElement('div'); layer.className = 'confetti'; layer.setAttribute('aria-hidden','true');
+    const colors=['#ff597b','#ffc857','#5cd6b0','#71a7ff','#c185ff'];
+    for(let i=0;i<64;i++){
+      const piece=document.createElement('i');
+      piece.style.setProperty('--x',Math.random()*100+'%');
+      piece.style.setProperty('--drift',(Math.random()-.5)*180+'px');
+      piece.style.setProperty('--delay',Math.random()*.6+'s');
+      piece.style.setProperty('--turn',Math.random()*720+'deg');
+      piece.style.background=colors[i%colors.length]; layer.append(piece);
+    }
+    document.body.append(layer);setTimeout(()=>layer.remove(),4000);
+  }
   $('quiz-back').addEventListener('click', () => {
     if (advancing || state.step === 0) return;
     state.step--;
@@ -133,6 +134,7 @@
   });
   $('quiz-restart').addEventListener('click', () => {
     clearTimeout(timer);
+    document.querySelector('.confetti')?.remove();
     state = { step: 0, answers: Array(questions.length).fill(null), completed: false };
     save();
     $('result-details').open = false;

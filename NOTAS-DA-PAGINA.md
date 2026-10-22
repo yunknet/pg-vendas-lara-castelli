@@ -59,3 +59,10 @@ Auditoria da correção: 14 larguras (320 a 2560px), em quatro estados (landing 
 - Quiz em cinco telas com imagem de abertura ilustrativa, seleção múltipla de objetivos e resultado pela pontuação. Nova chave de sessão evita carregar respostas do formato antigo.
 - Estrutura inspirada em poscanetinha.com.br; oferta e perguntas adaptadas ao produto Lara, sem importar escassez ou promessas do exemplo.
 - Testadas 3840 combinações de respostas e 56 combinações de layout. Fluxo de seleção múltipla até o resultado verificado no navegador.
+
+## Simplificação da página e quiz — 22/10/2026
+- Removido o card visual do web app indicado pelo usuário; mantida a explicação da entrega.
+- Chamadas simplificadas, removidos header/footer do quiz, textos auxiliares e parágrafos longos do resultado.
+- Seis perguntas de escolha única, com avanço ao clicar, incluindo a caneta usada. Marca não altera a pontuação nem gera orientação de medicamento.
+- Confetes coloridos ao concluir, com alternativa estática breve para movimento reduzido.
+- Verificados: 6144 combinações, 56 estados/larguras sem overflow ou cortes, fluxo completo e criação dos confetes no navegador.
