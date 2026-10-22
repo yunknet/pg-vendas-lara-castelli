@@ -23,3 +23,34 @@
 
 .result-annual-tip{font-size:12.5px;line-height:1.5;color:#c6d8be;margin:14px 0 16px;text-align:center;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px}
 .result-annual-tip strong{color:var(--lime)}
+
+.quiz-shell .pricing-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  width: 100%;
+  margin: 22px 0 16px;
+  text-align: left;
+}
+.quiz-shell .price-card {
+  padding: 30px 20px 22px;
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(25, 62, 50, 0.08);
+}
+.quiz-shell .price-card-featured {
+  border: 2px solid var(--lime);
+  background: #ffffff;
+}
+.quiz-shell .price-card .button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+.quiz-shell .price-card h3 {
+  color: var(--green);
+}

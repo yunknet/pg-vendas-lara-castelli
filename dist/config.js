@@ -1,3 +1,4 @@
-// O quiz funciona sem configuração externa. Informe aqui o checkout HTTPS
-// para que o CTA final passe de detalhes da proposta para compra.
-window.LARA_CONFIG = { conversionUrl: '' };
+window.LARA_CONFIG = {
+  checkoutMensal: 'https://lastlink.com/p/CF7FF860C/checkout-payment/',
+  checkoutAnual: 'https://lastlink.com/p/CC766B758/checkout-payment/'
+};

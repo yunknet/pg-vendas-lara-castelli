@@ -103,8 +103,17 @@
     $('result-panel').hidden = false;
     $('result-title').textContent = result.profile.title;
     $('result-goal').textContent = result.goal;
+    $('result-panel').querySelectorAll('[data-checkout]').forEach(link => {
+      const plan = link.getAttribute('data-checkout');
+      const target = plan === 'mensal'
+        ? (window.LARA_CONFIG?.checkoutMensal || 'https://lastlink.com/p/CF7FF860C/checkout-payment/')
+        : (window.LARA_CONFIG?.checkoutAnual || 'https://lastlink.com/p/CC766B758/checkout-payment/');
+      if (typeof window.laraAttachUtms === 'function') {
+        link.href = window.laraAttachUtms(target);
+      }
+    });
     const checkout = window.laraCheckoutUrl();
-    if (checkout) {
+    if (checkout && $('result-cta')) {
       $('result-cta').href = checkout;
       $('result-cta').innerHTML = '<span>Quero meu acesso agora</span><svg class="icon-arrow" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
@@ -140,13 +149,16 @@
     $('result-details').open = false;
     drawQuestion(true);
   });
-  $('result-cta').addEventListener('click', event => {
-    if (!window.laraCheckoutUrl()) {
-      event.preventDefault();
-      $('result-details').open = true;
-      $('result-details').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
-      $('result-details').querySelector('summary').focus({ preventScroll: true });
-    }
-  });
+  const resultCta = $('result-cta');
+  if (resultCta) {
+    resultCta.addEventListener('click', event => {
+      if (!window.laraCheckoutUrl()) {
+        event.preventDefault();
+        $('result-details').open = true;
+        $('result-details').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
+        $('result-details').querySelector('summary').focus({ preventScroll: true });
+      }
+    });
+  }
   state.completed ? drawResult() : drawQuestion();
 })();
