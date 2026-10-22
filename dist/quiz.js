@@ -36,6 +36,13 @@
     $('quiz-kicker').textContent = question.kicker;
     $('question-note').textContent = question.note;
     $('quiz-picture').hidden = !question.picture;
+    if (question.picture) {
+      const picture = $('quiz-picture');
+      picture.querySelector('img').src = question.picture.src;
+      picture.querySelector('img').alt = question.picture.alt;
+      picture.querySelector('strong').textContent = question.picture.title;
+      picture.querySelector('small').textContent = question.picture.tag;
+    }
     $('quiz-options').replaceChildren();
     question.options.forEach((option, index) => {
       const button = document.createElement('button');

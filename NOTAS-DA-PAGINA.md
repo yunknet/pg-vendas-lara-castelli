@@ -44,3 +44,11 @@ Antes de qualquer publicação com alterações em CSS ou JS, executar:
 O primeiro comando gera arquivos com hash em dist/assets e atualiza referências HTML. Isso evita reutilizar CSS/JS antigos do cache. Editar os arquivos fonte de dist/, não os arquivos com hash. Preservar assets publicados de versões anteriores para que páginas HTML ainda em cache continuem funcionando. Hashes normalizam quebras de linha para serem estáveis no Windows e no Linux.
 
 Auditoria da correção: 14 larguras (320 a 2560px), em quatro estados (landing com FAQ aberto, primeira pergunta, última pergunta, resultado): 56 combinações sem overflow ou corte dos textos inspecionados. Contraste do título e preço confirmado no card verde do resultado. Verificação visual manual de cards e oferta em tela estreita. Não equivale a certificação de todos os modelos de celular/navegadores.
+
+## Atualização de mídias — 21/10/2026
+- O responsável confirmou que vídeos, fotos e relatos enviados são materiais da Lara; Propósito Fit é apenas referência de estrutura.
+- Quatro prévias de treino em H.264/AAC, 720p, faststart, controles nativos e sem autoplay. Total aproximado: 4,9 MB; carregamento sob demanda.
+- Cinco prints únicos de relatos, ampliáveis por diálogo acessível. Print repetido omitido. Conteúdo original preservado.
+- Web app, receitas e acesso pelo navegador explicitados na apresentação, oferta, FAQ e resultado do quiz.
+- Fotos nas perguntas 1 e 3; emojis contextuais nas 24 alternativas; pontuação preservada.
+- QA: 56 combinações de estados/larguras de 320 a 2560 px sem overflow nem cortes detectados. Testes dos assets e das 4096 combinações do quiz aprovados.

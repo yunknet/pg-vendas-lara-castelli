@@ -15,3 +15,5 @@
 .quiz-shell .eyebrow { display: block; }
 .quiz-option { min-height: 64px; }
 .quiz-controls .text-button { min-width: 60px; }
+
+.option-icon{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:25px;font-style:normal}
