@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   const { questions, validAnswers, calculateProfile } = window.LaraQuiz;
-  const key = 'lara-quiz-v1';
+  const key = 'lara-quiz-v2';
   let state = { step: 0, answers: Array(questions.length).fill(null), completed: false };
   let advancing = false;
   let timer;
@@ -43,12 +43,15 @@
       picture.querySelector('strong').textContent = question.picture.title;
       picture.querySelector('small').textContent = question.picture.tag;
     }
+    $('quiz-opening').hidden = state.step !== 0;
+    $('quiz-continue').hidden = !question.multiple;
+    $('quiz-continue').disabled = !Array.isArray(state.answers[state.step]) || state.answers[state.step].length === 0;
     $('quiz-options').replaceChildren();
     question.options.forEach((option, index) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'quiz-option';
-      button.setAttribute('aria-pressed', String(state.answers[state.step] === index));
+      button.setAttribute('aria-pressed', String(question.multiple ? (state.answers[state.step] || []).includes(index) : state.answers[state.step] === index));
       const icon = document.createElement('span');
       icon.className = 'option-icon';
       icon.setAttribute('aria-hidden', 'true');
@@ -69,6 +72,13 @@
   }
   function choose(index) {
     if (advancing) return;
+    if (questions[state.step].multiple) {
+      const selected = Array.isArray(state.answers[state.step]) ? [...state.answers[state.step]] : [];
+      const position = selected.indexOf(index);
+      if (position === -1) selected.push(index); else selected.splice(position, 1);
+      state.answers[state.step] = selected.length ? selected : null;
+      save(); drawQuestion(); return;
+    }
     advancing = true;
     state.answers[state.step] = index;
     $('quiz-options').querySelectorAll('button').forEach((button, i) => {
@@ -95,6 +105,7 @@
     const result = calculateProfile(state.answers);
     advancing = false;
     $('questions-panel').hidden = true;
+    $('quiz-opening').hidden = true;
     $('result-panel').hidden = false;
     $('result-title').textContent = result.profile.title;
     $('result-description').textContent = result.profile.body;
@@ -110,6 +121,10 @@
     updateProgress();
     if (focus) focusTitle('result-title');
   }
+  $('quiz-continue').addEventListener('click', () => {
+    if (advancing || !questions[state.step].multiple || !state.answers[state.step]?.length) return;
+    state.step++; save(); drawQuestion(true);
+  });
   $('quiz-back').addEventListener('click', () => {
     if (advancing || state.step === 0) return;
     state.step--;

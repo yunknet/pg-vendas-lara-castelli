@@ -1,6 +1,6 @@
 (function (root) {
   'use strict';
-  const questions = [
+  const originalQuestions = [
     { kicker: 'RESPONDA DO SEU JEITO', title: 'Como você se sente com seu corpo depois de emagrecer?', note: 'Não existe resposta certa. Escolha a que mais combina com você.', picture: { src: 'assets/quiz-momento.png', alt: 'Mulher adulta com roupa esportiva diante de um espelho na academia', title: 'Seu corpo mudou. O cuidado continua.', tag: 'UMA NOVA FASE' }, options: [
       { icon: '🪞', label: 'Me sinto melhor, mas a flacidez ainda incomoda', scores: { clareza: 2 } },
       { icon: '💪', label: 'Emagreci, mas esperava mais definição', scores: { treino: 2 } },
@@ -38,6 +38,18 @@
       { icon: '💚', label: 'Construir uma rotina de cuidado que eu consiga manter', scores: { constancia: 5 }, priority: 'constancia' }
     ]}
   ];
+  const questions = [
+    { kicker: 'SEU MOMENTO', title: 'Você usa ou já usou alguma caneta emagrecedora?', note: 'Escolha a opção que combina com a sua experiência.', picture: {src:'assets/quiz-comparacao.jpg',alt:'Comparação visual ilustrativa de duas aparências corporais',title:'O emagrecimento foi uma etapa. O cuidado continua.',tag:'SUA PRÓXIMA ETAPA'}, options: [
+      {icon:'💉',label:'Uso atualmente',scores:{}},
+      {icon:'✅',label:'Já usei',scores:{}},
+      {icon:'🌱',label:'Emagreci sem usar canetas',scores:{}},
+      {icon:'💭',label:'Ainda estou conhecendo essa fase',scores:{}}
+    ]},
+    {...originalQuestions[1], title:'O que você quer cuidar nessa nova fase?', note:'Pode escolher mais de uma opção.', multiple:true},
+    {...originalQuestions[2], picture:null},
+    originalQuestions[3],
+    originalQuestions[5]
+  ];
   const profiles = {
     clareza: { title: 'Seu começo pede mais clareza.', body: 'Suas respostas destacam a vontade de entender o que faz sentido para o seu corpo depois do emagrecimento. Separar os objetivos ajuda a escolher o próximo passo com expectativas mais claras.', actionTitle: 'Entenda o que você quer cuidar.', action: 'Buscar definição muscular é diferente de remover excesso de pele. Treino e alimentação podem fazer parte do cuidado com a composição corporal; a pele que sobrou precisa de avaliação individual. Leve essa diferença em conta ao organizar seus objetivos.' },
     treino: { title: 'Seu próximo foco é dar direção ao treino.', body: 'A busca por definição apareceu com destaque nas suas respostas. O seu interesse agora é entender como colocar o exercício a serviço dessa nova fase.', actionTitle: 'Transforme seu objetivo em direção.', action: 'Comece identificando o que você quer desenvolver e como o exercício cabe na sua rotina. A proposta reúne orientação de treino, alimentação e acompanhamento para apoiar esse começo.' },
@@ -45,12 +57,12 @@
     constancia: { title: 'Seu próximo foco é a continuidade.', body: 'Você quer cuidar do corpo e encontrar espaço para isso na vida real. Suas respostas destacam a importância de ter direção e apoio para continuar.', actionTitle: 'Comece pelo que cabe no seu dia.', action: 'Identifique os momentos em que o cuidado costuma ficar para depois. A proposta conecta treino, alimentação e acompanhamento para apoiar a passagem da intenção para uma rotina.' }
   };
   function validAnswers(answers, complete = true) {
-    return Array.isArray(answers) && answers.length === questions.length && answers.every((a, i) => (!complete && a === null) || (Number.isInteger(a) && a >= 0 && a < questions[i].options.length));
+    return Array.isArray(answers) && answers.length === questions.length && answers.every((a, i) => (!complete && a === null) || (questions[i].multiple ? Array.isArray(a) && a.length > 0 && new Set(a).size === a.length && a.every(n => Number.isInteger(n) && n >= 0 && n < questions[i].options.length) : Number.isInteger(a) && a >= 0 && a < questions[i].options.length));
   }
   function calculateProfile(answers) {
     if (!validAnswers(answers)) throw new TypeError('Respostas incompletas ou inválidas.');
     const scores = Object.fromEntries(Object.keys(profiles).map(key => [key, 0]));
-    answers.forEach((answer, i) => Object.entries(questions[i].options[answer].scores).forEach(([key, weight]) => { scores[key] += weight; }));
+    answers.forEach((answer, i) => (Array.isArray(answer) ? answer : [answer]).forEach(index => Object.entries(questions[i].options[index].scores).forEach(([key, weight]) => { scores[key] += weight; })));
     const preferred = questions.at(-1).options[answers.at(-1)].priority;
     const ranking = Object.keys(scores).sort((a, b) => scores[b] - scores[a] || (a === preferred ? -1 : b === preferred ? 1 : 0));
     return { key: ranking[0], scores, profile: profiles[ranking[0]], goal: questions.at(-1).options[answers.at(-1)].label, context: questions[2].options[answers[2]].context };

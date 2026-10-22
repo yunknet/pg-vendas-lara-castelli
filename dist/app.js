@@ -19,3 +19,19 @@ if (dialog) {
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
   dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
 }
+
+const film = document.getElementById('hero-film');
+if (film) {
+  const clips = film.dataset.clips.split(',');
+  const toggle = document.querySelector('.film-toggle');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let index = 0, userPaused = reduced.matches;
+  const sync = () => { toggle.textContent = userPaused || film.paused ? 'Reproduzir vídeo' : 'Pausar vídeo'; toggle.setAttribute('aria-label', toggle.textContent + ' de fundo'); };
+  const play = () => { if (!film.src) film.src = clips[index]; film.muted = true; film.play().then(sync).catch(sync); };
+  film.addEventListener('ended', () => { index = (index + 1) % clips.length; film.src = clips[index]; if (!userPaused && !document.hidden) play(); });
+  film.addEventListener('play', sync); film.addEventListener('pause', sync);
+  toggle.addEventListener('click', () => { userPaused = !film.paused; if (userPaused) film.pause(); else play(); sync(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) film.pause(); else if (!userPaused) play(); });
+  reduced.addEventListener('change', event => { if (event.matches) { userPaused = true; film.pause(); sync(); } });
+  if (!userPaused) play(); else sync();
+}

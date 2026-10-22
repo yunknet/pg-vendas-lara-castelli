@@ -52,3 +52,10 @@ Auditoria da correção: 14 larguras (320 a 2560px), em quatro estados (landing 
 - Web app, receitas e acesso pelo navegador explicitados na apresentação, oferta, FAQ e resultado do quiz.
 - Fotos nas perguntas 1 e 3; emojis contextuais nas 24 alternativas; pontuação preservada.
 - QA: 56 combinações de estados/larguras de 320 a 2560 px sem overflow nem cortes detectados. Testes dos assets e das 4096 combinações do quiz aprovados.
+
+## Novo topo e quiz de cinco etapas
+- Removidos header da landing, chamada superior e antigo conjunto de cards do hero.
+- Quatro clipes alternam sequencialmente no fundo, sem áudio; pausa acessível, poster de fallback e respeito a movimento reduzido. Removida a grade de vídeos com legendas numeradas.
+- Quiz em cinco telas com imagem de abertura ilustrativa, seleção múltipla de objetivos e resultado pela pontuação. Nova chave de sessão evita carregar respostas do formato antigo.
+- Estrutura inspirada em poscanetinha.com.br; oferta e perguntas adaptadas ao produto Lara, sem importar escassez ou promessas do exemplo.
+- Testadas 3840 combinações de respostas e 56 combinações de layout. Fluxo de seleção múltipla até o resultado verificado no navegador.

@@ -1,27 +1,14 @@
 const assert = require('node:assert/strict');
 const { questions, profiles, calculateProfile, validAnswers } = require('../dist/quiz-data.js');
-const winners = new Set();
-let combinations = 0;
-for (let n = 0; n < 4 ** questions.length; n++) {
-  const answers = Array.from({ length: questions.length }, (_, i) => (n >> (2 * i)) & 3);
-  const result = calculateProfile(answers);
-  const max = Math.max(...Object.values(result.scores));
-  assert.equal(result.scores[result.key], max, 'Winner must have the highest score');
-  const preference = questions.at(-1).options[answers.at(-1)].priority;
-  if (result.scores[preference] === max) assert.equal(result.key, preference, 'Explicit priority wins ties');
-  assert.equal(result.context, questions[2].options[answers[2]].context);
-  assert.ok(result.goal && result.profile.action && result.profile.body);
-  winners.add(result.key);
-  combinations++;
+const winners = new Set(); let combinations = 0;
+for(let a=0;a<4;a++)for(let mask=1;mask<16;mask++)for(let c=0;c<4;c++)for(let d=0;d<4;d++)for(let e=0;e<4;e++){
+ const selected=[0,1,2,3].filter(i=>mask&(1<<i)); const answers=[a,selected,c,d,e];
+ const r=calculateProfile(answers),max=Math.max(...Object.values(r.scores)),preference=questions.at(-1).options[e].priority;
+ assert.equal(r.scores[r.key],max);if(r.scores[preference]===max)assert.equal(r.key,preference);
+ assert.equal(r.context,questions[2].options[c].context);assert.ok(r.goal&&r.profile.action);winners.add(r.key);combinations++;
 }
-assert.deepEqual([...winners].sort(), Object.keys(profiles).sort(), 'All profiles are reachable');
-for (const invalid of [null, [], Array(6).fill(null), Array(6).fill(4), Array(6).fill(-1), Array(6).fill('0'), [0, 0, 0, 0, 0, NaN]]) {
-  assert.equal(validAnswers(invalid), false);
-  assert.throws(() => calculateProfile(invalid), TypeError);
-}
-assert.equal(validAnswers(Array(6).fill(null), false), true);
-assert.equal(calculateProfile([0, 0, 2, 3, 0, 0]).key, 'clareza');
-assert.equal(calculateProfile([1, 1, 0, 3, 2, 1]).key, 'treino');
-assert.equal(calculateProfile([3, 2, 3, 0, 3, 2]).key, 'alimentacao');
-assert.equal(calculateProfile([2, 3, 1, 1, 1, 3]).key, 'constancia');
-console.log('PASS: ' + combinations + ' combinations, all four profiles, ties and invalid inputs.');
+assert.deepEqual([...winners].sort(),Object.keys(profiles).sort());
+for(const bad of [null,[],[0,[],0,0,0],[0,[0,0],0,0,0],[0,[4],0,0,0],[0,0,0,0,0],[0,[0],0,0,NaN],Array(5).fill(null)]){assert.equal(validAnswers(bad),false);assert.throws(()=>calculateProfile(bad),TypeError)}
+assert.equal(validAnswers(Array(5).fill(null),false),true);
+assert.equal(validAnswers([0,[0,2],null,null,null],false),true);
+console.log('PASS: '+combinations+' combinations; multiple selections, all profiles, ties and invalid answers.');
