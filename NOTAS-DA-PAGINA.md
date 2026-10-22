@@ -66,3 +66,11 @@ Auditoria da correção: 14 larguras (320 a 2560px), em quatro estados (landing 
 - Seis perguntas de escolha única, com avanço ao clicar, incluindo a caneta usada. Marca não altera a pontuação nem gera orientação de medicamento.
 - Confetes coloridos ao concluir, com alternativa estática breve para movimento reduzido.
 - Verificados: 6144 combinações, 56 estados/larguras sem overflow ou cortes, fluxo completo e criação dos confetes no navegador.
+
+## Legibilidade e espaçamento — 22/10/2026
+- Headline alterada para a versão solicitada com canetinhas e pele flácida.
+- Textos de apoio maiores e mais contrastados; CTAs com borda, sombra e estados de interação.
+- Reduzido espaçamento vertical entre seções; removido link Responder às perguntas.
+- Vídeo sem controles visíveis, autoplay mudo e inline; restrições do navegador ainda podem impedir autoplay.
+- Usuário confirmou que a imagem específica de antes e depois é uma transformação real. Removida a indicação de comparação ilustrativa, sem atribuir prazo ou resultado ao produto.
+- QA: 56 combinações de layout sem cortes/overflow; reprodução automática observada; testes de assets e quiz aprovados.

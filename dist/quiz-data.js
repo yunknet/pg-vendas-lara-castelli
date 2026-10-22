@@ -7,7 +7,7 @@ const questions=[
     "note": "",
     "picture": {
       "src": "assets/quiz-comparacao.jpg",
-      "alt": "Comparação visual ilustrativa de duas aparências corporais",
+      "alt": "Comparação de antes e depois fornecida pela marca",
       "title": "O emagrecimento foi uma etapa. O cuidado continua.",
       "tag": "SUA PRÓXIMA ETAPA"
     },
