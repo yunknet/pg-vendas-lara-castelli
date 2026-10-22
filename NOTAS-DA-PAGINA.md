@@ -74,3 +74,15 @@ Auditoria da correção: 14 larguras (320 a 2560px), em quatro estados (landing 
 - Vídeo sem controles visíveis, autoplay mudo e inline; restrições do navegador ainda podem impedir autoplay.
 - Usuário confirmou que a imagem específica de antes e depois é uma transformação real. Removida a indicação de comparação ilustrativa, sem atribuir prazo ou resultado ao produto.
 - QA: 56 combinações de layout sem cortes/overflow; reprodução automática observada; testes de assets e quiz aprovados.
+
+## Adição do Plano Anual e Desconto — 22/10/2026
+- Adicionado o Plano Anual por R$ 297,90 na seção de oferta da página de vendas (`index.html`) ao lado do Plano Mensal por R$ 37,90.
+- Percentual de desconto e economia:
+  - 12 meses no plano mensal: 12 × R$ 37,90 = R$ 454,80.
+  - Plano Anual: R$ 297,90.
+  - Economia de R$ 156,90 no ano (desconto de 34,5%, comunicado como 34% OFF).
+  - Custo mensal equivalente no plano anual: R$ 24,82/mês.
+- Destaques no card do Plano Anual: selo superior "MAIS ESCOLHIDO · 34% DE DESCONTO", tag "Você economiza R$ 156,90 no ano (34% OFF)" e valor equivalente mensal de R$ 24,82.
+- Grid responsivo de planos: 2 colunas no desktop com cards alinhados, e coluna única fluida em telas mobile e tablets.
+- Mencionada a disponibilidade de ambos os planos no resultado do quiz (`quiz.html`) e no FAQ da página de vendas.
+- Pipeline de assets executado (`scripts/build-assets.cjs`), hashes atualizados e testes de integridade (`tests/assets.test.cjs` e `tests/quiz.test.cjs`) aprovados 100%.
