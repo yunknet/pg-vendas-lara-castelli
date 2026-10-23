@@ -18,17 +18,17 @@ const questions=[
         "scores": {}
       },
       {
-        "icon": "✅",
+        "icon": "⏱️",
         "label": "Já usei",
         "scores": {}
       },
       {
-        "icon": "🌱",
+        "icon": "🏃‍♀️",
         "label": "Emagreci sem usar canetas",
         "scores": {}
       },
       {
-        "icon": "💭",
+        "icon": "🔍",
         "label": "Ainda estou conhecendo essa fase",
         "scores": {}
       }
@@ -60,12 +60,12 @@ const questions=[
         "scores": {}
       },
       {
-        "icon": "💉",
+        "icon": "🔄",
         "label": "Outra / usei mais de uma",
         "scores": {}
       },
       {
-        "icon": "🌱",
+        "icon": "✨",
         "label": "Nunca usei",
         "scores": {}
       }
@@ -77,28 +77,28 @@ const questions=[
     "note": "",
     "options": [
       {
-        "icon": "🤔",
+        "icon": "🪞",
         "label": "A flacidez depois de emagrecer",
         "scores": {
           "clareza": 3
         }
       },
       {
-        "icon": "🏋️",
+        "icon": "💪",
         "label": "A falta de definição no corpo",
         "scores": {
           "treino": 3
         }
       },
       {
-        "icon": "🥗",
+        "icon": "🍽️",
         "label": "Não saber o que comer",
         "scores": {
           "alimentacao": 3
         }
       },
       {
-        "icon": "🤝",
+        "icon": "🗓️",
         "label": "Não conseguir manter uma rotina",
         "scores": {
           "constancia": 3
@@ -113,21 +113,21 @@ const questions=[
     "picture": null,
     "options": [
       {
-        "icon": "🌱",
+        "icon": "👟",
         "label": "Ainda não comecei ou estou recomeçando",
         "scores": {
           "treino": 3
         }
       },
       {
-        "icon": "🗓️",
+        "icon": "⏱️",
         "label": "Faço de vez em quando, sem uma sequência",
         "scores": {
           "constancia": 3
         }
       },
       {
-        "icon": "🤔",
+        "icon": "🏋️‍♀️",
         "label": "Já treino, mas tenho dúvidas sobre o que fazer",
         "scores": {
           "treino": 2,
@@ -135,7 +135,7 @@ const questions=[
         }
       },
       {
-        "icon": "✅",
+        "icon": "🔥",
         "label": "Já tenho uma rotina e quero continuar cuidando dela",
         "scores": {
           "constancia": 1
@@ -149,14 +149,14 @@ const questions=[
     "note": "",
     "options": [
       {
-        "icon": "🥗",
+        "icon": "🤷‍♀️",
         "label": "Ainda não sei como organizar essa nova fase",
         "scores": {
           "alimentacao": 3
         }
       },
       {
-        "icon": "🔄",
+        "icon": "📉",
         "label": "Consigo por alguns dias, depois me desorganizo",
         "scores": {
           "constancia": 2,
@@ -164,14 +164,14 @@ const questions=[
         }
       },
       {
-        "icon": "💭",
+        "icon": "🥑",
         "label": "Já me organizo, mas tenho dúvidas",
         "scores": {
           "alimentacao": 2
         }
       },
       {
-        "icon": "✅",
+        "icon": "🥗",
         "label": "Tenho uma rotina alimentar bem organizada",
         "scores": {}
       }
@@ -183,7 +183,7 @@ const questions=[
     "note": "",
     "options": [
       {
-        "icon": "🪞",
+        "icon": "💪",
         "label": "Cuidar da flacidez e buscar mais definição",
         "scores": {
           "clareza": 5
@@ -191,7 +191,7 @@ const questions=[
         "priority": "clareza"
       },
       {
-        "icon": "🏋️",
+        "icon": "📋",
         "label": "Ter um treino para seguir",
         "scores": {
           "treino": 5
@@ -199,7 +199,7 @@ const questions=[
         "priority": "treino"
       },
       {
-        "icon": "🥗",
+        "icon": "🥑",
         "label": "Organizar minha alimentação",
         "scores": {
           "alimentacao": 5
@@ -207,7 +207,7 @@ const questions=[
         "priority": "alimentacao"
       },
       {
-        "icon": "💚",
+        "icon": "🌸",
         "label": "Cuidar de mim com mais frequência",
         "scores": {
           "constancia": 5
