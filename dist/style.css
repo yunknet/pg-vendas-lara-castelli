@@ -865,12 +865,24 @@ a:hover .icon-arrow, button:hover .icon-arrow {
   display: block;
 }
 
-.price > strong {
+.price-main-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.price-val-wrap {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.price strong {
   display: inline-block;
-  font: 800 clamp(42px, 4.4vw, 58px)/1.15 'Manrope', sans-serif;
+  font: 800 clamp(38px, 4.2vw, 54px)/1.15 'Manrope', sans-serif;
   letter-spacing: -0.06em;
   color: var(--green);
-  margin-top: 4px;
 }
 
 .price strong small {
@@ -887,6 +899,29 @@ a:hover .icon-arrow, button:hover .icon-arrow {
   font-weight: 600;
   color: var(--muted);
   margin-left: 2px;
+}
+
+.price-bonus-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 13px;
+  background: rgba(25, 62, 50, 0.05);
+  border: 1.5px solid var(--green);
+  border-radius: 9px;
+  font-family: 'Manrope', -apple-system, sans-serif;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--green);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.price-card-featured .price-bonus-box {
+  background: rgba(217, 237, 154, 0.35);
+  border: 1.5px solid #193e32;
+  color: #193e32;
 }
 
 .price-installment {
