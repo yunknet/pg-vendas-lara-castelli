@@ -75,6 +75,18 @@
 
     advancing = true;
     state.answers[state.step] = index;
+
+    const question = questions[state.step];
+    const option = question?.options?.[index];
+    if (typeof window.laraTrackPixel === 'function') {
+      window.laraTrackPixel('QuizStep', {
+        step: state.step + 1,
+        total_steps: questions.length,
+        question: question?.title || '',
+        answer: option?.label || ''
+      }, true);
+    }
+
     $('quiz-options').querySelectorAll('button').forEach((button, i) => {
       button.setAttribute('aria-pressed', String(index === i));
       button.disabled = true;
@@ -103,6 +115,18 @@
     $('result-panel').hidden = false;
     $('result-title').textContent = result.profile.title;
     $('result-goal').textContent = result.goal;
+
+    if (typeof window.laraTrackPixel === 'function') {
+      window.laraTrackPixel('Lead', {
+        content_name: result.profile.title,
+        goal: result.goal
+      });
+      window.laraTrackPixel('QuizComplete', {
+        profile: result.key,
+        goal: result.goal
+      }, true);
+    }
+
     $('result-panel').querySelectorAll('[data-checkout]').forEach(link => {
       const plan = link.getAttribute('data-checkout');
       const target = plan === 'mensal'
@@ -111,10 +135,20 @@
       if (typeof window.laraAttachUtms === 'function') {
         link.href = window.laraAttachUtms(target);
       }
+      link.onclick = () => {
+        if (typeof window.laraTrackCheckout === 'function') {
+          window.laraTrackCheckout(plan);
+        }
+      };
     });
     const checkout = window.laraCheckoutUrl();
     if (checkout && $('result-cta')) {
       $('result-cta').href = checkout;
+      $('result-cta').onclick = () => {
+        if (typeof window.laraTrackCheckout === 'function') {
+          window.laraTrackCheckout('mensal');
+        }
+      };
       $('result-cta').innerHTML = '<span>Quero meu acesso agora</span><svg class="icon-arrow" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     updateProgress();
@@ -159,6 +193,9 @@
         $('result-details').querySelector('summary').focus({ preventScroll: true });
       }
     });
+  }
+  if (typeof window.laraTrackPixel === 'function' && !state.completed) {
+    window.laraTrackPixel('ViewContent', { content_name: 'Quiz Lara Castelli' });
   }
   state.completed ? drawResult() : drawQuestion();
 })();

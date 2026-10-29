@@ -1,12 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const file = path.resolve(__dirname, '../dist/index.html');
-let content = fs.readFileSync(file, 'utf8');
-
-const isCrlf = content.includes('\r\n');
-const nl = isCrlf ? '\r\n' : '\n';
-
 const pixelSnippet = [
   '  <!-- Meta Pixel Code -->',
   '  <script>',
@@ -25,14 +19,22 @@ const pixelSnippet = [
   '  src="https://www.facebook.com/tr?id=1841329007288706&ev=PageView&noscript=1"',
   '  /></noscript>',
   '  <!-- End Meta Pixel Code -->'
-].join(nl);
+];
 
-if (content.includes('1841329007288706')) {
-  console.log('Pixel already present in index.html.');
-} else {
-  const target = '</head>';
-  const replacement = pixelSnippet + nl + target;
-  content = content.replace(target, replacement);
-  fs.writeFileSync(file, content, 'utf8');
-  console.log('Pixel successfully added to index.html.');
+for (const page of ['index.html', 'quiz.html']) {
+  const file = path.resolve(__dirname, '../dist', page);
+  let content = fs.readFileSync(file, 'utf8');
+  const isCrlf = content.includes('\r\n');
+  const nl = isCrlf ? '\r\n' : '\n';
+  const snippet = pixelSnippet.join(nl);
+
+  if (content.includes('1841329007288706')) {
+    console.log(`Pixel already present in ${page}.`);
+  } else {
+    const target = '</head>';
+    const replacement = snippet + nl + target;
+    content = content.replace(target, replacement);
+    fs.writeFileSync(file, content, 'utf8');
+    console.log(`Pixel successfully added to ${page}.`);
+  }
 }
