@@ -106,6 +106,49 @@
       }
     }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 220);
   }
+  let countdownInterval = null;
+  const TIMER_STORAGE_KEY = 'lara-quiz-timer-end';
+  const TEN_MINUTES_MS = 10 * 60 * 1000;
+
+  function startOfferTimer() {
+    if (countdownInterval) clearInterval(countdownInterval);
+
+    let endTime = null;
+    try {
+      const stored = sessionStorage.getItem(TIMER_STORAGE_KEY);
+      if (stored) {
+        endTime = parseInt(stored, 10);
+      }
+    } catch {}
+
+    const now = Date.now();
+    if (!endTime || isNaN(endTime) || endTime <= now - 3600000) {
+      endTime = now + TEN_MINUTES_MS;
+      try {
+        sessionStorage.setItem(TIMER_STORAGE_KEY, String(endTime));
+      } catch {}
+    }
+
+    function update() {
+      const remainingMs = Math.max(0, endTime - Date.now());
+      const totalSeconds = Math.floor(remainingMs / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+
+      const minEl = $('quiz-timer-minutes');
+      const secEl = $('quiz-timer-seconds');
+      if (minEl) minEl.textContent = String(minutes).padStart(2, '0');
+      if (secEl) secEl.textContent = String(seconds).padStart(2, '0');
+
+      if (remainingMs <= 0 && countdownInterval) {
+        clearInterval(countdownInterval);
+      }
+    }
+
+    update();
+    countdownInterval = setInterval(update, 1000);
+  }
+
   function drawResult(focus = false) {
     if (!validAnswers(state.answers)) return drawQuestion(focus);
     const result = calculateProfile(state.answers);
@@ -151,6 +194,7 @@
       };
       $('result-cta').innerHTML = '<span>Quero meu acesso agora</span><svg class="icon-arrow" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
+    startOfferTimer();
     updateProgress();
     if (focus) { focusTitle('result-title'); celebrate(); }
   }
@@ -177,6 +221,8 @@
   });
   $('quiz-restart').addEventListener('click', () => {
     clearTimeout(timer);
+    if (countdownInterval) clearInterval(countdownInterval);
+    try { sessionStorage.removeItem(TIMER_STORAGE_KEY); } catch {}
     document.querySelector('.confetti')?.remove();
     state = { step: 0, answers: Array(questions.length).fill(null), completed: false };
     save();

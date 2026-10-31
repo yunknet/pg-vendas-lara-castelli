@@ -96,3 +96,9 @@ Auditoria da correção: 14 larguras (320 a 2560px), em quatro estados (landing 
 - Alinhamento centralizado do card em tela desktop e mobile sem quebras de layout.
 - Lógica no banco de dados do app de membros mantida intacta para permitir reintrodução de ambos os planos no futuro se desejado.
 - Build de assets com fingerprinting (`scripts/build-assets.cjs`) e testes automatizados (`tests/assets.test.cjs` e `tests/quiz.test.cjs`) 100% aprovados.
+
+## Adição do Timer de Escassez — 10 Minutos após o Quiz — 31/10/2026
+- Adicionado componente de contagem regressiva de 10 minutos exclusivamente no painel de oferta pós-quiz (`quiz.html`), sem alterar a página de vendas inicial (`index.html`).
+- Mensagem de destaque: "Oferta por tempo limitado!" em badge com ponto pulsante animado, acompanhado do texto de apoio e display digital tabular (minutos : segundos).
+- Persistência e restauração em `sessionStorage` para garantir contagem estável mesmo com recarga da página, e limpeza automática caso a usuária clique em reiniciar o quiz.
+- Build de assets com fingerprinting e testes de integridade 100% aprovados.
