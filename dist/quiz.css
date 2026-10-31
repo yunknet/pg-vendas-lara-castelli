@@ -54,3 +54,29 @@
 .quiz-shell .price-card h3 {
   color: var(--green);
 }
+
+.quiz-shell .price-deal-banner {
+  display: block;
+  background: rgba(110, 163, 62, 0.16);
+  border: 1.5px solid rgba(110, 163, 62, 0.45);
+  color: #193e32;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-top: 12px;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.quiz-shell .price-deal-banner strong,
+.quiz-shell .price-deal-banner .deal-highlight {
+  font-weight: 800;
+  color: #112e24;
+  background: var(--lime);
+  padding: 2px 7px;
+  border-radius: 6px;
+  display: inline-block;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  letter-spacing: -0.01em;
+}

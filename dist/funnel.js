@@ -46,7 +46,7 @@ window.laraTrackCheckout = function (plan) {
   const isAnual = plan === 'anual';
   window.laraTrackPixel('InitiateCheckout', {
     content_name: isAnual ? 'Plano Anual' : 'Plano Mensal',
-    value: isAnual ? 297.90 : 27.90,
+    value: 27.90,
     currency: 'BRL'
   });
 };
@@ -61,5 +61,5 @@ document.querySelectorAll('[data-checkout]').forEach(link => {
 });
 
 window.laraCheckoutUrl = function () {
-  return window.LARA_CONFIG?.checkoutMensal || 'https://lastlink.com/p/CF7FF860C/checkout-payment/';
+  return window.LARA_CONFIG?.checkoutAnual || 'https://lastlink.com/p/CC766B758/checkout-payment/';
 };

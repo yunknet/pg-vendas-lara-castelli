@@ -86,3 +86,13 @@ Auditoria da correção: 14 larguras (320 a 2560px), em quatro estados (landing 
 - Grid responsivo de planos: 2 colunas no desktop com cards alinhados, e coluna única fluida em telas mobile e tablets.
 - Mencionada a disponibilidade de ambos os planos no resultado do quiz (`quiz.html`) e no FAQ da página de vendas.
 - Pipeline de assets executado (`scripts/build-assets.cjs`), hashes atualizados e testes de integridade (`tests/assets.test.cjs` e `tests/quiz.test.cjs`) aprovados 100%.
+
+## Atualização de Oferta Exclusiva — Plano Anual por R$ 27,90 — 31/10/2026
+- Remoção do Plano Mensal na página de vendas (`index.html`) e após o quiz (`quiz.html`), mantendo apenas a oferta única do Plano Anual por R$ 27,90.
+- Destaque em banner: "Pague apenas 27,90 e tenha acesso por 1 ano." com "27,90" e "1 ano" realçados visualmente na cor de destaque (--lime).
+- Preço âncora original de R$ 297,90 tachado ("De R$ 297,90 por R$ 27,90/ano"), selo de bônus "(+Bônus 🎁)" mantido e selo superior "ACESSO COMPLETO · 1 ANO INTEIRO".
+- Checkout direto da Lastlink atualizado para `https://lastlink.com/p/CC766B758/checkout-payment/` com preservação automática de parâmetros UTM (`window.laraAttachUtms`).
+- Rastreamento Meta Pixel InitiateCheckout com valor R$ 27,90 BRL.
+- Alinhamento centralizado do card em tela desktop e mobile sem quebras de layout.
+- Lógica no banco de dados do app de membros mantida intacta para permitir reintrodução de ambos os planos no futuro se desejado.
+- Build de assets com fingerprinting (`scripts/build-assets.cjs`) e testes automatizados (`tests/assets.test.cjs` e `tests/quiz.test.cjs`) 100% aprovados.
